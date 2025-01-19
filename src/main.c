@@ -1,9 +1,18 @@
+//main.c
+
 #include <stdio.h>
-#include <string.h>  // Ajoutez l'inclusion de string.h pour strcspn et strcmp
+#include <string.h>  
 #include "table.h"
 #include "row.h"
 #include "utils.h"
-#include "sql_client.h"  // Assurez-vous que sql_client.h est bien inclus
+#include "sql_client.h" 
+
+#include <stdio.h>
+#include <string.h>
+#include "table.h"
+#include "row.h"
+#include "utils.h"
+#include "sql_client.h"
 
 int main() {
     MYSQL *conn;
@@ -13,6 +22,15 @@ int main() {
     init_connection(&conn);
 
     printf("Welcome to MyCLI!\n");
+
+    // Créer la base de données
+    create_database(conn);
+
+    // Créer une table
+    create_table("my_table");
+
+    // Insérer un enregistrement dans la table
+    insert_record(conn);
 
     // Boucle principale pour accepter les requêtes utilisateur
     while (1) {
@@ -41,3 +59,5 @@ int main() {
 
     return 0;
 }
+
+

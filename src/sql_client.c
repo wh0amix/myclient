@@ -4,6 +4,11 @@
 #include <string.h>
 #include <mysql/mysql.h>
 #include "sql_client.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <mysql/mysql.h>
+#include "sql_client.h"
 
 // Fonction pour initialiser la connexion MySQL
 void init_connection(MYSQL **conn) {
@@ -12,19 +17,39 @@ void init_connection(MYSQL **conn) {
         fprintf(stderr, "Erreur d'initialisation: %s\n", mysql_error(*conn));
         exit(1);
     }
-    if (mysql_real_connect(*conn, "localhost", "root", "password", "mydb", 0, NULL, 0) == NULL) {
+    if (mysql_real_connect(*conn, "localhost", "root", "password", NULL, 0, NULL, 0) == NULL) {
         fprintf(stderr, "Erreur de connexion: %s\n", mysql_error(*conn));
         mysql_close(*conn);
         exit(1);
     }
 }
 
-// Fonction pour fermer la connexion MySQL
+// Fonction pour créer une base de données
+void create_database(MYSQL *conn) {
+    const char *query = "CREATE DATABASE IF NOT EXISTS mydb";
+    if (mysql_query(conn, query)) {
+        fprintf(stderr, "Erreur de création de la base de données: %s\n", mysql_error(conn));
+    } else {
+        printf("Base de données créée avec succès.\n");
+    }
+}
+
+void insert_record(MYSQL *conn) {
+    const char *query = "INSERT INTO my_table (id, data) VALUES (1, 'Data1')";
+    if (mysql_query(conn, query)) {
+        fprintf(stderr, "Erreur d'insertion: %s\n", mysql_error(conn));
+    } else {
+        printf("Enregistrement inséré avec succès.\n");
+    }
+}
+
+
 void close_connection(MYSQL *conn) {
     mysql_close(conn);
 }
 
-// Fonction pour exécuter la requête SQL
+
+// Fonction pour exécuter une requête SQL
 void execute_query(MYSQL *conn, const char *query) {
     if (mysql_query(conn, query)) {
         fprintf(stderr, "Erreur dans la requête: %s\n", mysql_error(conn));
@@ -53,3 +78,4 @@ void execute_query(MYSQL *conn, const char *query) {
 
     mysql_free_result(res);
 }
+

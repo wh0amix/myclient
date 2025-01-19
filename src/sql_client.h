@@ -8,5 +8,7 @@
 void init_connection(MYSQL **conn);
 void close_connection(MYSQL *conn);
 void execute_query(MYSQL *conn, const char *query);
+void create_database(MYSQL *conn);
+void insert_record(MYSQL *conn);
 
 #endif // SQL_CLIENT_H
