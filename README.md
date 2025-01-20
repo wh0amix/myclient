@@ -1,6 +1,12 @@
 # Projet myclient
 
 Ce projet implémente un gestionnaire de données en ligne de commande, développé en **C**, permettant l'exécution de commandes similaires à SQL.
+## Auteur
+**Nom** : MOUGAMMADOU
+**Prénom** : Muhammad Anas
+**Classe** : 3SI4
+
+---
 
 ## Fonctionnalités :
 - **NOUVELLE TABLE** : Crée une nouvelle table avec un nombre défini de colonnes et leurs noms.
