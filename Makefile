@@ -1,44 +1,23 @@
 # Variables
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -std=c11
-LDFLAGS =
-SRC_DIR = src
-OBJ_DIR = obj
-BIN_DIR = bin
-LIBS = -lmysqlclient  # Lien vers la bibliothèque MySQL
+CFLAGS = -Wall -Werror -std=c99
+TARGET = bin/class_db
 
-TARGET = $(BIN_DIR)/mycli
-
-# Liste des fichiers sources
-SRCS = $(wildcard $(SRC_DIR)/*.c)
-
-# Génération des fichiers objets correspondants
-OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+# Fichiers sources et objets
+SRCS = src/main.c src/btree.c src/repl.c
+OBJS = bin/main.o bin/btree.o bin/repl.o
 
 # Règle principale
 all: $(TARGET)
 
-# Règle pour construire l'exécutable
+# Lien final
 $(TARGET): $(OBJS)
-	@mkdir -p $(BIN_DIR)
-	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
 
-# Règle pour compiler les fichiers objets
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
+# Compilation des fichiers objets
+bin/%.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Nettoyage des fichiers objets et de l'exécutable
+# Nettoyage
 clean:
-	@rm -rf $(OBJ_DIR) $(BIN_DIR)
-
-# Exécution du programme
-run: all
-	@./$(TARGET)
-
-# Règle pour tester
-test: all
-	@echo "Tests à implémenter"
-
-# Phony targets
-.PHONY: all clean run test
+	rm -f bin/*.o $(TARGET)
