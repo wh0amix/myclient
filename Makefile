@@ -1,7 +1,7 @@
 # Variables
 CC = gcc
 CFLAGS = -Wall -Werror -std=c99
-TARGET = bin/class_db
+TARGET = bin/myclient
 
 # Fichiers sources et objets
 SRCS = src/main.c src/btree.c src/repl.c

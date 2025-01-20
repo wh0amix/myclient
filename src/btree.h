@@ -34,6 +34,8 @@ void insert_row(Table* table, char values[MAX_COLUMNS][50]);
 Node* create_node(int key, int row_index);
 Node* insert_node(Node* root, int key, int row_index);
 Node* search_node(Node* root, int key);
+Node* delete_node(Node* root, int key);
+Node* find_min(Node* root);
 void print_in_order(Node* root);
 
 #endif
