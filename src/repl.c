@@ -96,7 +96,6 @@ void start_repl() {
     printf("  - INSERT\n");
     printf("  - SELECT\n");
     printf("  - DELETE\n");
-    printf("  - SHOW TREE\n");
     printf("  - EXIT\n\n");
 
     while (1) {
@@ -181,7 +180,7 @@ void start_repl() {
                 print_tree(myclient.index);
             }
         } else {
-            printf("Commande inconnue. Essayez CREATE TABLE, EXIT, INSERT, SELECT, DELETE ou SHOW TREE.\n");
+            printf("Commande inconnue. Essayez CREATE TABLE, EXIT, INSERT, SELECT, DELETE.\n");
         }
     }
 }
